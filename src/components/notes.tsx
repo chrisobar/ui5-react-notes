@@ -7,7 +7,7 @@ import {
   Title,
   Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
-import { NoteDialog } from "./noteDialog";
+
 import { INote, INoteProps } from "./notesModel";
 
 interface INotePropsEx extends INoteProps {
@@ -65,15 +65,6 @@ export function NotesCard({
           {noteForm.dateModified.slice(0, 10)}
         </Label>
       </Card>
-      {/* {toggleAddNote ? (
-        <NoteDialog
-          mode={mode}
-          toggleAddNote={toggleAddNote}
-          setToggleAddNote={setToggleAddNote}
-          noteForm={noteForm}
-          setNoteForm={setNoteForm}
-        />
-      ) : null} */}
     </>
   );
 }

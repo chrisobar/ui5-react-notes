@@ -1,11 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import * as React from "react";
 import "./App.css";
 import {
   BusyIndicator,
   Button,
-  CheckBoxDomRef,
   InputDomRef,
   Toast,
   Ui5CustomEvent,
@@ -16,29 +13,29 @@ import Header from "./components/header";
 import { NoteDialog } from "./components/noteDialog";
 
 // icons
-import "@ui5/webcomponents-icons/dist/add-document";
-import "@ui5/webcomponents-icons/dist/eraser";
-import "@ui5/webcomponents-icons/dist/sys-cancel";
+import "@ui5/webcomponents-icons/dist/add-document.d.ts";
+import "@ui5/webcomponents-icons/dist/eraser.d.ts";
+import "@ui5/webcomponents-icons/dist/sys-cancel.d.ts";
 
 export default function App() {
   const sortedNotes = [...NotesData].sort(
     (a, b) =>
       new Date(b.dateModified).getTime() - new Date(a.dateModified).getTime()
   );
-  const [notesData, setNotesData] = useState(sortedNotes);
+  const [notesData, setNotesData] = React.useState(sortedNotes);
   console.log(notesData);
-  const [notesToast, setNotesToast] = useState<boolean>(false);
-  const [busy, setBusy] = useState<boolean>(false);
-  const [noteForm, setNoteForm] = useState({
+  const [notesToast, setNotesToast] = React.useState<boolean>(false);
+  const [busy, setBusy] = React.useState<boolean>(false);
+  const [noteForm, setNoteForm] = React.useState({
     id: 0,
     title: "",
     content: "",
     dateModified: "",
   });
-  const [toggleAddNote, setToggleAddNote] = useState<boolean>(false);
-  const [toggleDelete, setToggleDelete] = useState<boolean>(false);
-  const [mode, setMode] = useState<string>("");
-  const [selectedNotes, setSelectedNotes] = useState<INote[]>([]);
+  const [toggleAddNote, setToggleAddNote] = React.useState<boolean>(false);
+  const [toggleDelete, setToggleDelete] = React.useState<boolean>(false);
+  const [mode, setMode] = React.useState<string>("");
+  const [selectedNotes, setSelectedNotes] = React.useState<INote[]>([]);
 
   function onSearchNotes(e: Ui5CustomEvent<InputDomRef, never>) {
     setNotesToast(false);
@@ -63,7 +60,7 @@ export default function App() {
   }
 
   // Keyboard actions
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.altKey && event.key === "n") {
         setToggleAddNote(true);

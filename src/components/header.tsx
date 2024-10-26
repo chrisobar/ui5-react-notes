@@ -1,5 +1,4 @@
 import {
-  Button,
   Icon,
   Input,
   InputDomRef,
@@ -12,11 +11,11 @@ import {
   ShellBarItemPropTypes,
   Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
-import "@ui5/webcomponents-react/dist/assets";
-import React, { ChangeEvent, useRef, useState } from "react";
-import "@ui5/webcomponents-icons/dist/search";
-import "@ui5/webcomponents-icons/dist/palette";
-import { getTheme, setTheme } from "@ui5/webcomponents-base/dist/config/Theme";
+
+import * as React from "react";
+import "@ui5/webcomponents-icons/dist/search.d.ts";
+import "@ui5/webcomponents-icons/dist/palette.d.ts";
+import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
 
 const themesData = [
   { name: "sap_horizon", description: "SAP Horizon" },
@@ -30,9 +29,10 @@ interface IHeaderProps {
 }
 
 export default function Header({ onSearchNotes }: IHeaderProps) {
-  const buttonThemeRef = useRef<PopoverDomRef | null>(null);
-  const [currentTheme, setCurrentTheme] = useState<string>("sap_horizon");
-  const [toggleThemePopUp, setToggleThemePopUp] = useState<boolean>(false);
+  const buttonThemeRef = React.useRef<PopoverDomRef | null>(null);
+  const [currentTheme, setCurrentTheme] = React.useState<string>("sap_horizon");
+  const [toggleThemePopUp, setToggleThemePopUp] =
+    React.useState<boolean>(false);
 
   const onTogglePopOver: ShellBarItemPropTypes["onClick"] = (e) => {
     buttonThemeRef.current!.opener = e.detail.targetRef;
