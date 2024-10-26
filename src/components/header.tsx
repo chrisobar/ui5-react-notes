@@ -2,6 +2,7 @@ import {
   Button,
   Icon,
   Input,
+  InputDomRef,
   List,
   ListItemStandard,
   PopoverDomRef,
@@ -9,9 +10,10 @@ import {
   ShellBar,
   ShellBarItem,
   ShellBarItemPropTypes,
+  Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-react/dist/assets";
-import React, { useRef, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import "@ui5/webcomponents-icons/dist/search";
 import "@ui5/webcomponents-icons/dist/palette";
 import { getTheme, setTheme } from "@ui5/webcomponents-base/dist/config/Theme";
@@ -23,7 +25,11 @@ const themesData = [
   { name: "sap_fiori_3_dark", description: "Quartz Dark" },
 ];
 
-export default function Header() {
+interface IHeaderProps {
+  onSearchNotes: (e: Ui5CustomEvent<InputDomRef, never>) => void;
+}
+
+export default function Header({ onSearchNotes }: IHeaderProps) {
   const buttonThemeRef = useRef<PopoverDomRef | null>(null);
   const [currentTheme, setCurrentTheme] = useState<string>("sap_horizon");
   const [toggleThemePopUp, setToggleThemePopUp] = useState<boolean>(false);
@@ -48,7 +54,11 @@ export default function Header() {
           />
         }
         searchField={
-          <Input icon={<Icon name="search" />} placeholder="Search notes" />
+          <Input
+            icon={<Icon name="search" />}
+            placeholder="Search notes"
+            onChange={onSearchNotes}
+          />
         }
       >
         <ShellBarItem onClick={onTogglePopOver} icon="palette" text="Themes" />
